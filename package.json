@@ -12,7 +12,7 @@
     "api-server": "$(npm bin)/json-server --watch mock_api_server/db.json --port 3001",
     "test": "jest",
     "lint": "$(npm bin)/eslint src/**/*",
-    "lint:fix": "$(npm bin)/eslint --fix src/**/*.{js,vue}"
+    "lint:fix": "$(npm bin)/eslint --fix src/**/*.{ts,vue}"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -24,13 +24,7 @@
     "vuex-type-helper": "^1.2.0"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^3.4.8",
-    "@storybook/addon-centered": "^3.4.8",
-    "@storybook/addon-knobs": "^3.4.8",
-    "@storybook/addon-links": "^3.4.8",
-    "@storybook/addon-viewport": "^3.4.8",
     "@storybook/addons": "^3.4.8",
-    "@storybook/vue": "^3.4.8",
     "@types/moment": "^2.13.0",
     "@types/node": "^10.5.8",
     "@vue/test-utils": "^1.0.0-beta.21",
@@ -39,8 +33,13 @@
     "cypress": "^3.1.0",
     "eslint": "^5.3.0",
     "eslint-config-prettier": "^2.9.0",
+    "eslint-config-standard": "^12.0.0",
     "eslint-config-typescript": "^1.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-prettier": "^2.6.2",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-typescript": "^0.12.0",
     "eslint-plugin-vue": "^4.7.1",
     "file-loader": "^1.1.11",
