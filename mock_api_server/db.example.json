@@ -1,0 +1,72 @@
+{
+  "users": [
+    {
+      "name": "sample",
+      "email": "sample@sample.sample",
+      "password": "password",
+      "token": "userToke"
+    },
+    {
+      "name": "taro",
+      "email": "taro@taro.taro",
+      "password": "password",
+      "token": "taroToke"
+    }
+  ],
+  "books": [
+    {
+      "id": 1,
+      "url": "https://images-fe.ssl-images-amazon.com/images/I/51D3wgYhpwL._AC_US160_.jpg",
+      "name": "React入門 React・Reduxの導入からサーバサイドレンダリングによるUXの向上まで (NEXT ONE)",
+      "created_at": "2018-07-01 00:00:00",
+      "borrowed_at": "2018-07-03 00:00:00",
+      "returned_at": "2018-07-05 00:00:00",
+      "last_borrowed_user": "sample"
+    },
+    {
+      "id": 2,
+      "url": "https://images-fe.ssl-images-amazon.com/images/I/51yVWFs-ZtL._AC_US160_.jpg",
+      "name": "React開発 現場の教科書",
+      "created_at": "2018-07-02 00:00:00",
+      "borrowed_at": "2018-08-22 0:58:33",
+      "returned_at": "2018-07-03 00:00:00",
+      "last_borrowed_user": "sample"
+    },
+    {
+      "id": 3,
+      "url": "https://images-fe.ssl-images-amazon.com/images/I/511CqeD4sXL._AC_US160_.jpg",
+      "name": "作りながら学ぶ React入門",
+      "created_at": "2018-07-03 00:00:00",
+      "borrowed_at": "2018-08-05 14:16:18",
+      "returned_at": "2018-08-05 14:16:19",
+      "last_borrowed_user": "sample"
+    },
+    {
+      "id": 4,
+      "url": "https://images-fe.ssl-images-amazon.com/images/I/51HkQMzISkL._AC_US160_.jpg",
+      "name": "Reactビギナーズガイド ―コンポーネントベースのフロントエンド開発入門",
+      "created_at": "2018-07-04 00:00:00",
+      "borrowed_at": "2018-07-09 00:00:00",
+      "returned_at": "2018-08-05 14:16:04",
+      "last_borrowed_user": "sample"
+    },
+    {
+      "id": 5,
+      "url": "https://images-fe.ssl-images-amazon.com/images/I/41lYQRhcvmL._AC_US160_.jpg",
+      "name": "Reactではじめるフロントエンド開発入門",
+      "created_at": "2018-07-05 00:00:00",
+      "borrowed_at": "2018-08-26 11:54:44",
+      "returned_at": "2018-07-13 00:00:00",
+      "last_borrowed_user": "sample"
+    },
+    {
+      "id": 6,
+      "url": "https://images-fe.ssl-images-amazon.com/images/I/51ZMIQPE3hL._AC_US160_.jpg",
+      "name": "いまどきのJSプログラマーのための Node.jsとReactアプリケーション開発テクニック",
+      "created_at": "2018-07-06 00:00:00",
+      "borrowed_at": "2018-08-26 11:54:17",
+      "returned_at": "2018-08-05 23:58:08",
+      "last_borrowed_user": "sample"
+    }
+  ]
+}

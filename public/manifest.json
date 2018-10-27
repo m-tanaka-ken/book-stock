@@ -1,0 +1,12 @@
+{
+  "display": "standalone",
+  "icons": [{
+    "sizes": "180x180",
+    "src": "/img/logo.png",
+    "type": "image/png"
+  }],
+  "name": "Book Stock",
+  "short_name": "BookStock",
+  "start_url": "./",
+  "theme_color": "#fff"
+}

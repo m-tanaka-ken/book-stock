@@ -1,0 +1,123 @@
+<template>
+<div class="home">
+  <app-header class="page-header" :name="user.name" />
+  <div class="page-container">
+    <side-nav />
+    <contents-container v-show="true">
+      <book-list
+        :books="Home.newBooks"
+        :user="user"
+        @borrowBook="borrowBook"
+        @returnBook="returnBook"
+        title="新着"
+      />
+      <book-list
+        :books="Home.recommendBooks"
+        :user="user"
+        @borrowBook="borrowBook"
+        @returnBook="returnBook"
+        title="おすすめ"
+      />
+    </contents-container>
+  </div>
+</div>
+</template>
+
+<script lang="ts">
+import Vue from 'vue';
+import { mapState, mapGetters, mapActions } from 'vuex';
+import * as moment from 'moment';
+
+import AppHeader from '@/components/AppHeader';
+import SideNav from '@/components/SideNav';
+import ContentsContainer from '@/components/ContentsContainer';
+import BookList from '@/components/BookList';
+import { BookState } from '@/store/modules/Home';
+import apiBook from '@/apis/book';
+
+const { user, Home } = mapState(['user', 'Home']);
+const { init } = mapActions('Home', ['init']);
+
+export default Vue.extend({
+  name: 'Home',
+  components: {
+    AppHeader,
+    SideNav,
+    ContentsContainer,
+    BookList
+  },
+  data() {
+    return {
+      newBooks: [],
+      recommendBooks: []
+    };
+  },
+  computed: {
+    user,
+    Home,
+    ...mapGetters('user', ['nameAdd'])
+  },
+  created: async function() {
+    await this.init();
+  },
+  methods: {
+    init,
+    borrowBook: async function(book: BookState) {
+      const payload: BookState = Object.assign({}, book, {
+        borrowed_at: moment().format('YYYY-MM-DD H:mm:ss'),
+        last_borrowed_user: this.user.name
+      });
+      await apiBook.borrowBook(payload);
+      this.init();
+    },
+    returnBook: async function(book: BookState) {
+      const payload: BookState = Object.assign({}, book, {
+        returned_at: moment().format('YYYY-MM-DD H:mm:ss')
+      });
+      await apiBook.returnBook(payload);
+      this.init();
+    }
+  },
+  metaInfo() {
+    return { title: 'Home'}
+  }
+
+});
+</script>
+
+<style lang="scss" scoped>
+.home {
+  display: grid;
+  grid-template-rows: 47px 1fr 50px;
+  grid-template-areas:
+    'header'
+    'content-container'
+    'footer';
+}
+
+.page-header {
+  grid-area: header;
+}
+
+.page-container {
+  grid-area: content-container;
+  display: flex;
+  justify-content: space-between;
+  max-width: 1012px;
+  margin: auto;
+  padding: 16px 0 0;
+}
+
+@media screen and (max-width: 414px) {
+  .home {
+    grid-template-rows: 75px 1fr 50px;
+  }
+
+  .page-container {
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+  }
+
+}
+</style>
