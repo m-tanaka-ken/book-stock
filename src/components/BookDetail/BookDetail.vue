@@ -1,17 +1,22 @@
 <template>
   <div class="book-detail">
     <div class="image-container">
-      <img class="image-item" :src="book.url">
+      <img 
+        :src="book.url" 
+        class="image-item">
     </div>
     <div class="detail-container">
       <h2 class="title">{{ book.name }}</h2>
-      <borrows-button :book-state="bookState" @borrowBook="borrowBook" @returnBook="returnBook" />
+      <borrows-button 
+        :book-state="bookState" 
+        @borrowBook="borrowBook" 
+        @returnBook="returnBook" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import BorrowsButton from '@/components/BorrowsButton';
+import BorrowsButton from '@/components/BorrowsButton'
 
 export default {
   name: 'BookDetail',
@@ -34,7 +39,7 @@ export default {
       required: true
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

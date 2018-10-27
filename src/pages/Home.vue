@@ -1,42 +1,43 @@
 <template>
-<div class="home">
-  <app-header class="page-header" :name="user.name" />
-  <div class="page-container">
-    <side-nav />
-    <contents-container v-show="true">
-      <book-list
-        :books="Home.newBooks"
-        :user="user"
-        @borrowBook="borrowBook"
-        @returnBook="returnBook"
-        title="新着"
-      />
-      <book-list
-        :books="Home.recommendBooks"
-        :user="user"
-        @borrowBook="borrowBook"
-        @returnBook="returnBook"
-        title="おすすめ"
-      />
-    </contents-container>
+  <div class="home">
+    <app-header 
+      :name="user.name" 
+      class="page-header" />
+    <div class="page-container">
+      <side-nav />
+      <contents-container v-show="true">
+        <book-list
+          :books="Home.newBooks"
+          :user="user"
+          title="新着"
+          @borrowBook="borrowBook"
+          @returnBook="returnBook"
+        />
+        <book-list
+          :books="Home.recommendBooks"
+          :user="user"
+          title="おすすめ"
+          @borrowBook="borrowBook"
+          @returnBook="returnBook"
+        />
+      </contents-container>
+    </div>
   </div>
-</div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import { mapState, mapGetters, mapActions } from 'vuex';
-import * as moment from 'moment';
+import Vue from 'vue'
+import { mapState, mapGetters, mapActions } from 'vuex'
+import * as moment from 'moment'
 
-import AppHeader from '@/components/AppHeader';
-import SideNav from '@/components/SideNav';
-import ContentsContainer from '@/components/ContentsContainer';
-import BookList from '@/components/BookList';
-import { BookState } from '@/store/modules/Home';
-import apiBook from '@/apis/book';
+import AppHeader from '@/components/AppHeader'
+import SideNav from '@/components/SideNav'
+import ContentsContainer from '@/components/ContentsContainer'
+import BookList from '@/components/BookList'
+import apiBook from '@/apis/book'
 
-const { user, Home } = mapState(['user', 'Home']);
-const { init } = mapActions('Home', ['init']);
+const { user, Home } = mapState(['user', 'Home'])
+const { init } = mapActions('Home', ['init'])
 
 export default Vue.extend({
   name: 'Home',
@@ -50,7 +51,7 @@ export default Vue.extend({
     return {
       newBooks: [],
       recommendBooks: []
-    };
+    }
   },
   computed: {
     user,
@@ -58,31 +59,30 @@ export default Vue.extend({
     ...mapGetters('user', ['nameAdd'])
   },
   created: async function() {
-    await this.init();
+    await this.init()
   },
   methods: {
     init,
-    borrowBook: async function(book: BookState) {
-      const payload: BookState = Object.assign({}, book, {
+    borrowBook: async function(book: any) {
+      const payload: any = Object.assign({}, book, {
         borrowed_at: moment().format('YYYY-MM-DD H:mm:ss'),
         last_borrowed_user: this.user.name
-      });
-      await apiBook.borrowBook(payload);
-      this.init();
+      })
+      await apiBook.borrowBook(payload)
+      this.init()
     },
-    returnBook: async function(book: BookState) {
-      const payload: BookState = Object.assign({}, book, {
+    returnBook: async function(book: any) {
+      const payload: any = Object.assign({}, book, {
         returned_at: moment().format('YYYY-MM-DD H:mm:ss')
-      });
-      await apiBook.returnBook(payload);
-      this.init();
+      })
+      await apiBook.returnBook(payload)
+      this.init()
     }
   },
   metaInfo() {
-    return { title: 'Home'}
+    return { title: 'Home' }
   }
-
-});
+})
 </script>
 
 <style lang="scss" scoped>
@@ -118,6 +118,5 @@ export default Vue.extend({
     padding: 0;
     margin: 0;
   }
-
 }
 </style>

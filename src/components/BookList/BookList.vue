@@ -6,22 +6,29 @@
         v-for="book in books"
         :key="book.id"
         class="item"
-      ><router-link class="item-image" :to="`/books/${book.id}`"><img
-        :src="book.url"
-        :alt="book.name"
-      >
+      ><router-link 
+        :to="`/books/${book.id}`" 
+        class="item-image"><img
+          :src="book.url"
+          :alt="book.name"
+        >
       </router-link>
         <p class="item-title"><router-link :to="`/books/${book.id}`">{{ book.name }}</router-link></p>
-        <borrows-button class="item-button" :book-state="getBookState(book, user)" size="small" @borrowBook="$emit('borrowBook', book)" @returnBook="$emit('returnBook', book)" />
+        <borrows-button 
+          :book-state="getBookState(book, user)" 
+          class="item-button" 
+          size="small" 
+          @borrowBook="$emit('borrowBook', book)" 
+          @returnBook="$emit('returnBook', book)" />
       </li>
     </ul>
   </div>
 </template>
 
 <script lang="ts">
-import { BookState } from '@/store/modules/Home';
-import { UserState } from '@/store/modules/user';
-import BorrowsButton from '@/components/BorrowsButton';
+import { BookState } from '@/store/modules/Home'
+import { UserState } from '@/store/modules/user'
+import BorrowsButton from '@/components/BorrowsButton'
 
 export default {
   name: 'BookList',
@@ -42,20 +49,20 @@ export default {
   },
   methods: {
     canBorrow: function(book: BookState): boolean {
-      return book.borrowed_at <= book.returned_at;
+      return book.borrowed_at <= book.returned_at
     },
     isSelf: function(book: BookState, user: UserState): boolean {
-      return !!book.last_borrowed_user && user.name === book.last_borrowed_user;
+      return !!book.last_borrowed_user && user.name === book.last_borrowed_user
     },
     getBookState: function(book: BookState, user: UserState): string {
       return this.canBorrow(book)
         ? 'available'
         : this.isSelf(book, user)
           ? 'borrowedSelf'
-          : 'borrowed';
+          : 'borrowed'
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -64,8 +71,6 @@ export default {
   + .book-list-container {
     margin-top: 20px;
   }
-
-
 }
 
 .title {

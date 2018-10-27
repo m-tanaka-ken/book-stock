@@ -1,6 +1,8 @@
 <template>
   <div class="book">
-    <app-header class="page-header" :name="user.name" />
+    <app-header 
+      :name="user.name" 
+      class="page-header" />
     <div class="page-container">
       <side-nav />
       <contents-container>
@@ -16,18 +18,18 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import { mapState } from 'vuex';
-import * as moment from 'moment';
-import book, { Book } from '@/apis/book';
-import AppHeader from '@/components/AppHeader';
-import SideNav from '@/components/SideNav';
-import ContentsContainer from '@/components/ContentsContainer';
-import BookDetail from '@/components/BookDetail';
-import { BookState } from '@/store/modules/Home';
-import { UserState } from '@/store/modules/user';
+import Vue from 'vue'
+import { mapState } from 'vuex'
+import * as moment from 'moment'
+import book, { Book } from '@/apis/book'
+import AppHeader from '@/components/AppHeader'
+import SideNav from '@/components/SideNav'
+import ContentsContainer from '@/components/ContentsContainer'
+import BookDetail from '@/components/BookDetail'
+import { BookState } from '@/store/modules/Home'
+import { UserState } from '@/store/modules/user'
 
-const { user } = mapState(['user']);
+const { user } = mapState(['user'])
 export default Vue.extend({
   name: 'Book',
   components: {
@@ -48,66 +50,66 @@ export default Vue.extend({
         returned_at: '',
         last_borrowed_user: ''
       }
-    };
+    }
   },
   computed: {
     user
   },
   created: function() {
-    this.init();
+    this.init()
   },
   methods: {
     init: async function() {
       if (this.book === null) {
-        return;
+        return
       }
 
-      const { data } = await book.get({ id: this.id });
-      this.book = data[0];
+      const { data } = await book.get({ id: this.id })
+      this.book = data[0]
     },
     borrowBook: async function() {
       if (this.book === null) {
-        return;
+        return
       }
 
       // TODO 型が効いてない
       const payload: Book = Object.assign({}, this.book, {
         borrowed_at: moment().format('YYYY-MM-DD H:mm:ss'),
         last_borrowed_user: this.user.name
-      });
-      await book.borrowBook(payload);
-      this.init();
+      })
+      await book.borrowBook(payload)
+      this.init()
     },
     returnBook: async function() {
       if (this.book === null) {
-        return;
+        return
       }
 
       // TODO 型が効いてない
       const payload: Book = Object.assign({}, this.book, {
         returned_at: moment().format('YYYY-MM-DD H:mm:ss')
-      });
-      await book.returnBook(payload);
-      this.init();
+      })
+      await book.returnBook(payload)
+      this.init()
     },
     canBorrow: function(book: BookState): boolean {
-      return book.borrowed_at <= book.returned_at;
+      return book.borrowed_at <= book.returned_at
     },
     isSelf: function(book: BookState, user: UserState): boolean {
-      return !!book.last_borrowed_user && user.name === book.last_borrowed_user;
+      return !!book.last_borrowed_user && user.name === book.last_borrowed_user
     },
     getBookState: function(book: BookState, user: UserState): string {
       return this.canBorrow(book)
         ? 'available'
         : this.isSelf(book, user)
           ? 'borrowedSelf'
-          : 'borrowed';
+          : 'borrowed'
     }
   },
   metaInfo() {
-    return { title: 'Book'}
+    return { title: 'Book' }
   }
-});
+})
 </script>
 
 <style lang="scss" scoped>
