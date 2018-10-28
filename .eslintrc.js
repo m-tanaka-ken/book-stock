@@ -26,6 +26,6 @@ module.exports = {
     // very strange as somehow this rule gets different behaviors depending
     // on the presence of typescript-eslint-parser...
     'strict': 'off',
-    'prettier/prettier': ['error', { 'singleQuote': true, 'semi': false }]
+    'prettier/prettier': ['error', { 'singleQuote': true }]
     }
 };

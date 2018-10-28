@@ -11,7 +11,7 @@
     "build-storybook": "build-storybook",
     "api-server": "$(npm bin)/json-server --watch mock_api_server/db.json --port 3001",
     "test": "jest",
-    "lint": "$(npm bin)/eslint src/**/*",
+    "lint": "$(npm bin)/eslint src/**/*.{ts,vue}",
     "lint:fix": "$(npm bin)/eslint --fix src/**/*.{ts,vue}"
   },
   "dependencies": {
@@ -53,7 +53,9 @@
     "ts-loader": "^4.4.2",
     "typescript": "^3.0.1",
     "typescript-eslint-parser": "^18.0.0",
+    "vue-class-component": "^6.3.2",
     "vue-loader": "^15.2.6",
+    "vue-property-decorator": "^7.2.0",
     "vue-template-compiler": "^2.5.16",
     "webpack": "^4.16.1",
     "webpack-cli": "^3.1.0",

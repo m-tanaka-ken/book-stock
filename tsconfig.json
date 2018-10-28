@@ -1,16 +1,16 @@
 {
   "compilerOptions": {
     "outDir": "./built/",
-    "sourceMap": true,
     "strict": true,
+    "sourceMap": true,
     "noImplicitReturns": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
     "allowSyntheticDefaultImports": true,
-    "module": "es2015",
+    "module": "esnext",
     "moduleResolution": "node",
     "target": "es5",
-    "lib": ["es2015", "dom"],
+    "lib": ["esnext", "dom"],
     "experimentalDecorators": true,
     "baseUrl": ".",
     "paths": {

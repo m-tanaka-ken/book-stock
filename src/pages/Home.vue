@@ -26,18 +26,18 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { mapState, mapGetters, mapActions } from 'vuex'
-import * as moment from 'moment'
+import Vue from 'vue';
+import { mapState, mapGetters, mapActions } from 'vuex';
+import * as moment from 'moment';
 
-import AppHeader from '@/components/AppHeader'
-import SideNav from '@/components/SideNav'
-import ContentsContainer from '@/components/ContentsContainer'
-import BookList from '@/components/BookList'
-import apiBook from '@/apis/book'
+import AppHeader from '@/components/AppHeader';
+import SideNav from '@/components/SideNav';
+import ContentsContainer from '@/components/ContentsContainer';
+import BookList from '@/components/BookList';
+import apiBook from '@/apis/book';
 
-const { user, Home } = mapState(['user', 'Home'])
-const { init } = mapActions('Home', ['init'])
+const { user, Home } = mapState(['user', 'Home']);
+const { init } = mapActions('Home', ['init']);
 
 export default Vue.extend({
   name: 'Home',
@@ -51,7 +51,7 @@ export default Vue.extend({
     return {
       newBooks: [],
       recommendBooks: []
-    }
+    };
   },
   computed: {
     user,
@@ -59,7 +59,7 @@ export default Vue.extend({
     ...mapGetters('user', ['nameAdd'])
   },
   created: async function() {
-    await this.init()
+    await this.init();
   },
   methods: {
     init,
@@ -67,22 +67,22 @@ export default Vue.extend({
       const payload: any = Object.assign({}, book, {
         borrowed_at: moment().format('YYYY-MM-DD H:mm:ss'),
         last_borrowed_user: this.user.name
-      })
-      await apiBook.borrowBook(payload)
-      this.init()
+      });
+      await apiBook.borrowBook(payload);
+      this.init();
     },
     returnBook: async function(book: any) {
       const payload: any = Object.assign({}, book, {
         returned_at: moment().format('YYYY-MM-DD H:mm:ss')
-      })
-      await apiBook.returnBook(payload)
-      this.init()
+      });
+      await apiBook.returnBook(payload);
+      this.init();
     }
   },
   metaInfo() {
-    return { title: 'Home' }
+    return { title: 'Home' };
   }
-})
+});
 </script>
 
 <style lang="scss" scoped>

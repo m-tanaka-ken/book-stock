@@ -1,5 +1,5 @@
-import {GetterTree, ActionTree, MutationTree} from "vuex";
-import apiUser from "@/apis/user";
+import { GetterTree, ActionTree, MutationTree } from 'vuex';
+import apiUser from '@/apis/user.ts';
 import * as types from './types';
 
 export interface UserState {
@@ -46,7 +46,6 @@ const mutations: MutationTree<UserState> = {
     state.email = email;
   }
 };
-
 
 export default {
   namespaced: true,

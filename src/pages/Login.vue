@@ -67,8 +67,8 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import auth from '@/modules/authenticator'
+import Vue from 'vue';
+import auth from '@/modules/authenticator';
 
 export default Vue.extend({
   name: 'Login',
@@ -77,22 +77,22 @@ export default Vue.extend({
       email: '',
       password: '',
       authError: false
-    }
+    };
   },
   methods: {
     login: async function(): Promise<void> {
-      const result = await auth.login(this.email, this.password)
+      const result = await auth.login(this.email, this.password);
       if (result) {
-        this.$router.replace('/')
-        return
+        this.$router.replace('/');
+        return;
       }
-      this.authError = true
+      this.authError = true;
     }
   },
   metaInfo() {
-    return { title: 'Login' }
+    return { title: 'Login' };
   }
-})
+});
 </script>
 
 <style lang="scss" scoped>

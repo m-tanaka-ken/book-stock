@@ -1,3 +1,3 @@
-import BorrowsButton from './BorrowsButton.vue'
+import BorrowsButton from './BorrowsButton.vue';
 
 export default BorrowsButton;

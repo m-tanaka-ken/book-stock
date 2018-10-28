@@ -6,10 +6,10 @@ export interface BookState {
   id: string;
   url: string;
   name: string;
-  created_at: string;
-  borrowed_at: string;
-  returned_at: string;
-  last_borrowed_user: string;
+  createdAt: string;
+  borrowedAt: string;
+  returnedAt: string;
+  lastBorrowedUser: string;
 }
 
 const state: { newBooks: [BookState]; recommendBooks: [BookState] } = {
@@ -18,10 +18,10 @@ const state: { newBooks: [BookState]; recommendBooks: [BookState] } = {
       id: '0',
       url: '',
       name: '',
-      created_at: '',
-      borrowed_at: '',
-      returned_at: '',
-      last_borrowed_user: ''
+      createdAt: '',
+      borrowedAt: '',
+      returnedAt: '',
+      lastBorrowedUser: ''
     }
   ],
   recommendBooks: [
@@ -29,10 +29,10 @@ const state: { newBooks: [BookState]; recommendBooks: [BookState] } = {
       id: '0',
       url: '',
       name: '',
-      created_at: '',
-      borrowed_at: '',
-      returned_at: '',
-      last_borrowed_user: ''
+      createdAt: '',
+      borrowedAt: '',
+      returnedAt: '',
+      lastBorrowedUser: ''
     }
   ]
 };

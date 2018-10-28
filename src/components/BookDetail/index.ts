@@ -1,3 +1,3 @@
-import BookDetail from './BookDetail.vue'
+import BookDetail from './BookDetail.vue';
 
-export default BookDetail
+export default BookDetail;

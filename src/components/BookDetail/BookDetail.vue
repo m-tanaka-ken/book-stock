@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import BorrowsButton from '@/components/BorrowsButton'
+import BorrowsButton from '@/components/BorrowsButton';
 
 export default {
   name: 'BookDetail',
@@ -39,7 +39,7 @@ export default {
       required: true
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

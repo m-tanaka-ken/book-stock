@@ -61,9 +61,9 @@ export default {
   data() {
     return {
       isActive: false
-    }
+    };
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

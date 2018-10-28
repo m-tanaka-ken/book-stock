@@ -1,4 +1,4 @@
-import { api } from './api'
+import { api } from './api';
 
 export default {
   async authentication(email: string, password: string) {
@@ -8,9 +8,9 @@ export default {
           email,
           password
         }
-      })
+      });
     } catch (error) {
-      return error
+      return error;
     }
   },
   async fetchAs(token: string) {
@@ -19,9 +19,9 @@ export default {
         params: {
           token
         }
-      })
+      });
     } catch (error) {
-      return error
+      return error;
     }
   }
-}
+};

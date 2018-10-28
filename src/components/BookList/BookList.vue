@@ -26,9 +26,9 @@
 </template>
 
 <script lang="ts">
-import { BookState } from '@/store/modules/Home'
-import { UserState } from '@/store/modules/user'
-import BorrowsButton from '@/components/BorrowsButton'
+import { BookState } from '@/store/modules/Home';
+import { UserState } from '@/store/modules/user';
+import BorrowsButton from '@/components/BorrowsButton';
 
 export default {
   name: 'BookList',
@@ -49,20 +49,20 @@ export default {
   },
   methods: {
     canBorrow: function(book: BookState): boolean {
-      return book.borrowed_at <= book.returned_at
+      return book.borrowedAt <= book.returnedAt;
     },
     isSelf: function(book: BookState, user: UserState): boolean {
-      return !!book.last_borrowed_user && user.name === book.last_borrowed_user
+      return !!book.lastBorrowedUser && user.name === book.lastBorrowedUser;
     },
     getBookState: function(book: BookState, user: UserState): string {
       return this.canBorrow(book)
         ? 'available'
         : this.isSelf(book, user)
           ? 'borrowedSelf'
-          : 'borrowed'
+          : 'borrowed';
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
