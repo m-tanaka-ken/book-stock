@@ -6,7 +6,7 @@
     <div class="page-container">
       <side-nav />
       <contents-container>
-        <book-detail 
+        <book-detail
           :book="book" 
           :book-state="getBookState(book, user)"
           :borrow-book="borrowBook"
@@ -45,10 +45,10 @@ export default Vue.extend({
         id: '0',
         url: '',
         name: '',
-        created_at: '',
-        borrowed_at: '',
-        returned_at: '',
-        last_borrowed_user: ''
+        createdAt: '',
+        borrowedAt: '',
+        returnedAt: '',
+        lastBorrowedUser: ''
       }
     };
   },
@@ -64,19 +64,32 @@ export default Vue.extend({
         return;
       }
 
-      const { data } = await book.get({ id: this.id });
-      this.book = data[0];
+      const { data: books } = await book.get({ id: this.id });
+
+      this.book = {
+        id: books[0].id,
+        url: books[0].url,
+        name: books[0].name,
+        createdAt: books[0].created_at,
+        borrowedAt: books[0].borrowed_at,
+        returnedAt: books[0].returned_at,
+        lastBorrowedUser: books[0].last_borrowed_user
+      };
     },
     borrowBook: async function() {
       if (this.book === null) {
         return;
       }
 
-      // TODO 型が効いてない
-      const payload: Book = Object.assign({}, this.book, {
+      const payload = {
+        id: this.book.id,
+        url: this.book.url,
+        name: this.book.name,
+        created_at: this.book.createdAt,
+        returned_at: this.book.returnedAt,
         borrowed_at: moment().format('YYYY-MM-DD H:mm:ss'),
         last_borrowed_user: this.user.name
-      });
+      };
       await book.borrowBook(payload);
       this.init();
     },
@@ -85,10 +98,16 @@ export default Vue.extend({
         return;
       }
 
-      // TODO 型が効いてない
-      const payload: Book = Object.assign({}, this.book, {
+      const payload = {
+        id: this.book.id,
+        url: this.book.url,
+        name: this.book.name,
+        created_at: this.book.createdAt,
+        borrowed_at: this.book.borrowedAt,
+        last_borrowed_user: this.user.name,
         returned_at: moment().format('YYYY-MM-DD H:mm:ss')
-      });
+      };
+      console.log(payload);
       await book.returnBook(payload);
       this.init();
     },

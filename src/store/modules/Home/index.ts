@@ -42,14 +42,29 @@ const actions: ActionTree<
   { newBooks: [BookState]; recommendBooks: [BookState] }
 > = {
   async init({ commit }) {
+    const formatPayload = (book: any) => {
+      return {
+        id: book.id,
+        url: book.url,
+        name: book.name,
+        createdAt: book.created_at,
+        borrowedAt: book.borrowed_at,
+        returnedAt: book.returned_at,
+        lastBorrowedUser: book.last_borrowed_user
+      };
+    };
+
     const { data: newBooks } = await apiBook.get({
       _sort: 'created_at',
       _order: 'desc'
     });
 
     const { data: recommendBooks } = await apiBook.get();
-
-    commit(types.init, { newBooks, recommendBooks });
+    const payload = {
+      recommendBooks: recommendBooks.map(formatPayload),
+      newBooks: newBooks.map(formatPayload)
+    };
+    commit(types.init, payload);
   }
 };
 

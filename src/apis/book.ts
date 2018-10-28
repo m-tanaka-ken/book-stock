@@ -6,14 +6,15 @@ export interface BookQuery {
   _order?: 'desc' | 'asc';
 }
 
+/* eslint camelcase: 0 */
 export interface Book {
   id: string;
   url: string;
   name: string;
-  lastBorrowedUser: string;
-  borrowedAt: string;
-  returnedAt: string;
-  createdAt: string;
+  last_borrowed_user: string;
+  borrowed_at: string;
+  returned_at: string;
+  created_at: string;
 }
 
 export default {

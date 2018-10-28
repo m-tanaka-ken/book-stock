@@ -47,12 +47,6 @@ export default Vue.extend({
     ContentsContainer,
     BookList
   },
-  data() {
-    return {
-      newBooks: [],
-      recommendBooks: []
-    };
-  },
   computed: {
     user,
     Home,
@@ -64,17 +58,28 @@ export default Vue.extend({
   methods: {
     init,
     borrowBook: async function(book: any) {
-      const payload: any = Object.assign({}, book, {
+      const payload = {
+        id: book.id,
+        url: book.url,
+        name: book.name,
+        returned_at: book.returnedAt,
+        created_at: book.createdAt,
         borrowed_at: moment().format('YYYY-MM-DD H:mm:ss'),
         last_borrowed_user: this.user.name
-      });
+      };
       await apiBook.borrowBook(payload);
       this.init();
     },
     returnBook: async function(book: any) {
-      const payload: any = Object.assign({}, book, {
+      const payload = {
+        id: book.id,
+        url: book.url,
+        name: book.name,
+        created_at: book.createdAt,
+        borrowed_at: book.borrowedAt,
+        last_borrowed_user: book.lastBorrowedUser,
         returned_at: moment().format('YYYY-MM-DD H:mm:ss')
-      });
+      };
       await apiBook.returnBook(payload);
       this.init();
     }
