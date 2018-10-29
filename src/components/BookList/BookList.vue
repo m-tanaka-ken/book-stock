@@ -26,43 +26,40 @@
 </template>
 
 <script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator';
 import { BookState } from '@/store/modules/Home';
 import { UserState } from '@/store/modules/user';
 import BorrowsButton from '@/components/BorrowsButton';
 
-export default {
-  name: 'BookList',
-  components: { BorrowsButton },
-  props: {
-    title: {
-      type: String,
-      required: true
-    },
-    books: {
-      type: Array,
-      required: true
-    },
-    user: {
-      type: Object,
-      required: true
-    }
-  },
-  methods: {
-    canBorrow: function(book: BookState): boolean {
-      return book.borrowedAt <= book.returnedAt;
-    },
-    isSelf: function(book: BookState, user: UserState): boolean {
-      return !!book.lastBorrowedUser && user.name === book.lastBorrowedUser;
-    },
-    getBookState: function(book: BookState, user: UserState): string {
-      return this.canBorrow(book)
-        ? 'available'
-        : this.isSelf(book, user)
-          ? 'borrowedSelf'
-          : 'borrowed';
-    }
+@Component({
+  components: {
+    BorrowsButton
   }
-};
+})
+export default class BookList extends Vue {
+  @Prop()
+  private title!: string;
+  @Prop()
+  private books!: [BookState];
+  @Prop()
+  private user!: UserState;
+
+  canBorrow(book: BookState): boolean {
+    return book.borrowedAt <= book.returnedAt;
+  }
+
+  isSelf(book: BookState, user: UserState): boolean {
+    return !!book.lastBorrowedUser && user.name === book.lastBorrowedUser;
+  }
+
+  getBookState(book: BookState, user: UserState): string {
+    return this.canBorrow(book)
+      ? 'available'
+      : this.isSelf(book, user)
+        ? 'borrowedSelf'
+        : 'borrowed';
+  }
+}
 </script>
 
 <style lang="scss" scoped>
