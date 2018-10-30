@@ -25,19 +25,15 @@
 </template>
 
 <script lang="ts">
-export default {
-  name: 'BorrowsButton',
-  props: {
-    bookState: {
-      type: String,
-      required: true
-    },
-    size: {
-      type: String,
-      default: 'medium'
-    }
-  }
-};
+import { Component, Prop, Vue } from 'vue-property-decorator';
+
+@Component()
+export default class BorrowsButton extends Vue {
+  @Prop()
+  private bookState!: string;
+  @Prop({ default: 'medium' })
+  private size!: string;
+}
 </script>
 
 <style lang="scss" scoped>

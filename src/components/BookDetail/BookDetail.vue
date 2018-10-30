@@ -16,30 +16,22 @@
 </template>
 
 <script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator';
 import BorrowsButton from '@/components/BorrowsButton';
 
-export default {
-  name: 'BookDetail',
-  components: { BorrowsButton },
-  props: {
-    book: {
-      type: Object,
-      required: true
-    },
-    bookState: {
-      type: String,
-      required: true
-    },
-    borrowBook: {
-      type: Function,
-      required: true
-    },
-    returnBook: {
-      type: Function,
-      required: true
-    }
-  }
-};
+@Component({
+  components: { BorrowsButton }
+})
+export default class BookDetail extends Vue {
+  @Prop()
+  private book!: object;
+  @Prop()
+  private bookState!: string;
+  @Prop()
+  private borrowBook!: Function;
+  @Prop()
+  private returnBook!: Function;
+}
 </script>
 
 <style lang="scss" scoped>
