@@ -45,6 +45,9 @@ const user = namespace('user');
     SideNav,
     ContentsContainer,
     BookList
+  },
+  metaInfo() {
+    return { title: 'Home' };
   }
 })
 export default class Home extends Vue {
