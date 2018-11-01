@@ -1,14 +1,14 @@
 <template>
   <div class="book">
     <app-header 
-      :name="user.name" 
+      :name="name"
       class="page-header" />
     <div class="page-container">
       <side-nav />
       <contents-container>
         <book-detail
           :book="book" 
-          :book-state="getBookState(book, user)"
+          :book-state="getBookState(book, name)"
           :borrow-book="borrowBook"
           :return-book="returnBook"
         />
@@ -18,10 +18,11 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import { mapState } from 'vuex';
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import { namespace } from 'vuex-class';
+
 import * as moment from 'moment';
-import book, { Book } from '@/apis/book';
+import book from '@/apis/book';
 import AppHeader from '@/components/AppHeader';
 import SideNav from '@/components/SideNav';
 import ContentsContainer from '@/components/ContentsContainer';
@@ -29,106 +30,209 @@ import BookDetail from '@/components/BookDetail';
 import { BookState } from '@/store/modules/Home';
 import { UserState } from '@/store/modules/user';
 
-const { user } = mapState(['user']);
-export default Vue.extend({
-  name: 'Book',
+const user = namespace('user');
+
+@Component({
   components: {
     BookDetail,
     AppHeader,
     SideNav,
     ContentsContainer
   },
-  props: { id: { type: String, required: true } },
-  data() {
-    return {
-      book: {
-        id: '0',
-        url: '',
-        name: '',
-        createdAt: '',
-        borrowedAt: '',
-        returnedAt: '',
-        lastBorrowedUser: ''
-      }
-    };
-  },
-  computed: {
-    user
-  },
-  created: function() {
-    this.init();
-  },
-  methods: {
-    init: async function() {
-      if (this.book === null) {
-        return;
-      }
-
-      const { data: books } = await book.get({ id: this.id });
-
-      this.book = {
-        id: books[0].id,
-        url: books[0].url,
-        name: books[0].name,
-        createdAt: books[0].created_at,
-        borrowedAt: books[0].borrowed_at,
-        returnedAt: books[0].returned_at,
-        lastBorrowedUser: books[0].last_borrowed_user
-      };
-    },
-    borrowBook: async function() {
-      if (this.book === null) {
-        return;
-      }
-
-      const payload = {
-        id: this.book.id,
-        url: this.book.url,
-        name: this.book.name,
-        created_at: this.book.createdAt,
-        returned_at: this.book.returnedAt,
-        borrowed_at: moment().format('YYYY-MM-DD H:mm:ss'),
-        last_borrowed_user: this.user.name
-      };
-      await book.borrowBook(payload);
-      this.init();
-    },
-    returnBook: async function() {
-      if (this.book === null) {
-        return;
-      }
-
-      const payload = {
-        id: this.book.id,
-        url: this.book.url,
-        name: this.book.name,
-        created_at: this.book.createdAt,
-        borrowed_at: this.book.borrowedAt,
-        last_borrowed_user: this.user.name,
-        returned_at: moment().format('YYYY-MM-DD H:mm:ss')
-      };
-      console.log(payload);
-      await book.returnBook(payload);
-      this.init();
-    },
-    canBorrow: function(book: BookState): boolean {
-      return book.borrowedAt <= book.returnedAt;
-    },
-    isSelf: function(book: BookState, user: UserState): boolean {
-      return !!book.lastBorrowedUser && user.name === book.lastBorrowedUser;
-    },
-    getBookState: function(book: BookState, user: UserState): string {
-      return this.canBorrow(book)
-        ? 'available'
-        : this.isSelf(book, user)
-          ? 'borrowedSelf'
-          : 'borrowed';
-    }
-  },
   metaInfo() {
     return { title: 'Book' };
   }
-});
+})
+export default class Book extends Vue {
+  @user.State
+  name!: any;
+
+  @Prop()
+  private id!: string;
+
+  book: any = {
+    id: '0',
+    url: '',
+    name: '',
+    createdAt: '',
+    borrowedAt: '',
+    returnedAt: '',
+    lastBorrowedUser: ''
+  };
+
+  async created() {
+    await this.init();
+  }
+
+  async init() {
+    if (this.book === null) {
+      return;
+    }
+
+    const { data: books } = await book.get({ id: this.id });
+
+    this.book = {
+      id: books[0].id,
+      url: books[0].url,
+      name: books[0].name,
+      createdAt: books[0].created_at,
+      borrowedAt: books[0].borrowed_at,
+      returnedAt: books[0].returned_at,
+      lastBorrowedUser: books[0].last_borrowed_user
+    };
+  }
+
+  async borrowBook() {
+    if (this.book === null) {
+      return;
+    }
+
+    const payload = {
+      id: this.book.id,
+      url: this.book.url,
+      name: this.book.name,
+      created_at: this.book.createdAt,
+      returned_at: this.book.returnedAt,
+      borrowed_at: moment().format('YYYY-MM-DD H:mm:ss'),
+      last_borrowed_user: this.name
+    };
+    await book.borrowBook(payload);
+    this.init();
+  }
+
+  async returnBook() {
+    if (this.book === null) {
+      return;
+    }
+
+    const payload = {
+      id: this.book.id,
+      url: this.book.url,
+      name: this.book.name,
+      created_at: this.book.createdAt,
+      borrowed_at: this.book.borrowedAt,
+      last_borrowed_user: this.name,
+      returned_at: moment().format('YYYY-MM-DD H:mm:ss')
+    };
+    console.log(payload);
+    await book.returnBook(payload);
+    this.init();
+  }
+
+  canBorrow(book: BookState): boolean {
+    return book.borrowedAt <= book.returnedAt;
+  }
+
+  isSelf(book: BookState, name: string): boolean {
+    return !!book.lastBorrowedUser && name === book.lastBorrowedUser;
+  }
+  getBookState(book: BookState, name: string): string {
+    return this.canBorrow(book)
+      ? 'available'
+      : this.isSelf(book, name)
+        ? 'borrowedSelf'
+        : 'borrowed';
+  }
+}
+// export default Vue.extend({
+//   name: 'Book',
+//   components: {
+//     BookDetail,
+//     AppHeader,
+//     SideNav,
+//     ContentsContainer
+//   },
+//   props: { id: { type: String, required: true } },
+//   data() {
+//     return {
+//       book: {
+//         id: '0',
+//         url: '',
+//         name: '',
+//         createdAt: '',
+//         borrowedAt: '',
+//         returnedAt: '',
+//         lastBorrowedUser: ''
+//       }
+//     };
+//   },
+//   computed: {
+//     user
+//   },
+//   created: function() {
+//     this.init();
+//   },
+//   methods: {
+//     init: async function() {
+//       if (this.book === null) {
+//         return;
+//       }
+//
+//       const { data: books } = await book.get({ id: this.id });
+//
+//       this.book = {
+//         id: books[0].id,
+//         url: books[0].url,
+//         name: books[0].name,
+//         createdAt: books[0].created_at,
+//         borrowedAt: books[0].borrowed_at,
+//         returnedAt: books[0].returned_at,
+//         lastBorrowedUser: books[0].last_borrowed_user
+//       };
+//     },
+//     borrowBook: async function() {
+//       if (this.book === null) {
+//         return;
+//       }
+//
+//       const payload = {
+//         id: this.book.id,
+//         url: this.book.url,
+//         name: this.book.name,
+//         created_at: this.book.createdAt,
+//         returned_at: this.book.returnedAt,
+//         borrowed_at: moment().format('YYYY-MM-DD H:mm:ss'),
+//         last_borrowed_user: this.user.name
+//       };
+//       await book.borrowBook(payload);
+//       this.init();
+//     },
+//     returnBook: async function() {
+//       if (this.book === null) {
+//         return;
+//       }
+//
+//       const payload = {
+//         id: this.book.id,
+//         url: this.book.url,
+//         name: this.book.name,
+//         created_at: this.book.createdAt,
+//         borrowed_at: this.book.borrowedAt,
+//         last_borrowed_user: this.user.name,
+//         returned_at: moment().format('YYYY-MM-DD H:mm:ss')
+//       };
+//       console.log(payload);
+//       await book.returnBook(payload);
+//       this.init();
+//     },
+//     canBorrow: function(book: BookState): boolean {
+//       return book.borrowedAt <= book.returnedAt;
+//     },
+//     isSelf: function(book: BookState, user: UserState): boolean {
+//       return !!book.lastBorrowedUser && user.name === book.lastBorrowedUser;
+//     },
+//     getBookState: function(book: BookState, user: UserState): string {
+//       return this.canBorrow(book)
+//         ? 'available'
+//         : this.isSelf(book, user)
+//           ? 'borrowedSelf'
+//           : 'borrowed';
+//     }
+//   },
+//   metaInfo() {
+//     return { title: 'Book' };
+//   }
+// });
 </script>
 
 <style lang="scss" scoped>

@@ -44,11 +44,11 @@ export default class BookList extends Vue {
   @Prop()
   private user!: UserState;
 
-  canBorrow(book: BookState): boolean {
+  private canBorrow(book: BookState): boolean {
     return book.borrowedAt <= book.returnedAt;
   }
 
-  isSelf(book: BookState, user: UserState): boolean {
+  private isSelf(book: BookState, user: UserState): boolean {
     return !!book.lastBorrowedUser && user.name === book.lastBorrowedUser;
   }
 
