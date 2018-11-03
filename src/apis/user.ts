@@ -13,7 +13,7 @@ export default {
       return error;
     }
   },
-  async fetchAs(token: string) {
+  async fetchBy(token: string) {
     try {
       return await api.get('/users', {
         params: {

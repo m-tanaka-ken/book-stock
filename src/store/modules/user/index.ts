@@ -1,4 +1,4 @@
-import { GetterTree, ActionTree, MutationTree } from 'vuex';
+import { ActionTree, MutationTree, Module } from 'vuex';
 import apiUser from '@/apis/user.ts';
 import * as types from './types';
 
@@ -12,23 +12,10 @@ const state: UserState = {
   email: ''
 };
 
-const getters: GetterTree<UserState, UserState> = {
-  nameAdd: (state: UserState) => (value: string) => state.name + value
-};
-
-const actions: ActionTree<UserState, UserState> = {
-  async transformName({ commit }) {
-    commit(types.transformName, { name: 'ユーザー名' });
-    await new Promise(resolve => {
-      setTimeout(() => {
-        resolve();
-      }, 1000);
-    });
-    commit(types.transformName, { name: 'うせｒ名' });
-  },
+const actions: ActionTree<UserState, any> = {
   async fetchUser({ commit }, token: string) {
     try {
-      const { data } = await apiUser.fetchAs(token);
+      const { data } = await apiUser.fetchBy(token);
       commit(types.setUser, data[0]);
       return true;
     } catch (error) {
@@ -38,19 +25,17 @@ const actions: ActionTree<UserState, UserState> = {
 };
 
 const mutations: MutationTree<UserState> = {
-  transformName(state: UserState, { name }: UserState) {
-    state.name = name;
-  },
   setUser(state: UserState, { name, email }: UserState) {
     state.name = name;
     state.email = email;
   }
 };
 
-export default {
-  namespaced: true,
+const namespaced: boolean = true;
+
+export const user: Module<UserState, any> = {
+  namespaced,
   state,
-  getters,
   actions,
   mutations
 };
