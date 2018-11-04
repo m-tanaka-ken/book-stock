@@ -1,8 +1,11 @@
 const path = require('path');
+const webpack = require('webpack');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlPlugin = require('html-webpack-plugin');
 const history = require('connect-history-api-fallback');
 const convert = require('koa-connect');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin;
 
 module.exports = {
   mode: process.env.WEBPACK_SERVE ? 'development' : 'production',
@@ -48,8 +51,10 @@ module.exports = {
     }
   },
   plugins: [
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new VueLoaderPlugin(),
-    new HtmlPlugin({ template: 'src/template.html' })
+    new HtmlPlugin({ template: 'src/template.html' }),
+    new BundleAnalyzerPlugin()
   ],
   serve: {
     content: path.resolve(__dirname, 'public'),
