@@ -113,7 +113,6 @@ export default class Book extends Vue {
       last_borrowed_user: this.name,
       returned_at: moment().format('YYYY-MM-DD H:mm:ss')
     };
-    console.log(payload);
     await book.returnBook(payload);
     this.init();
   }
