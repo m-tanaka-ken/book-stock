@@ -27,8 +27,8 @@
                 v-validate="'required'"
                 id="email"
                 v-model="email"
-                type="email"
                 name="email"
+                type="email"
                 placeholder="example@example.com"
                 class="form-input"
               >
@@ -50,6 +50,7 @@
               <input
                 id="password"
                 v-model="password"
+                name="password"
                 type="password"
                 class="form-input"
               >
