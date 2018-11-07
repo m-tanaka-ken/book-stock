@@ -77,6 +77,7 @@ export default {
   grid-template-columns: 1fr 180px 25px;
   grid-template-areas: 'heading search nav-user';
   align-items: center;
+  margin: auto;
   max-width: 1012px;
   color: #fff;
   height: 100%;

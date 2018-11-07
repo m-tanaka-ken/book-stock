@@ -11,6 +11,10 @@
     "moduleResolution": "node",
     "target": "es5",
     "lib": ["esnext", "dom"],
+    "types": [
+      "cypress",
+      "node"
+    ],
     "experimentalDecorators": true,
     "baseUrl": ".",
     "paths": {
@@ -19,6 +23,6 @@
       ]
     }
   },
-  "include": ["./src/**/*"],
+  "include": ["./src/**/*", "cypress/**/*.ts"],
   "exclude": ["node_modules"]
 }
