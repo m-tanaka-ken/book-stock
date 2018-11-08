@@ -34,7 +34,7 @@
               >
             </div>
           </div>
-          <span>{{ errors.first('email') }}</span>
+          <span class="error">{{ errors.first('email') }}</span>
         </div>
         <div class="form-row">
           <div class="field-info">
@@ -93,6 +93,9 @@ export default class Login extends Vue {
 </script>
 
 <style lang="scss" scoped>
+.error {
+  color: red;
+}
 .page-login {
   position: fixed;
   height: 100%;
