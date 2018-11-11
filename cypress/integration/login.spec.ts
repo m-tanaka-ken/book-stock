@@ -1,5 +1,12 @@
-describe('サンプル', () => {
-  it('表示', () => {
+describe('ログインフォーム', () => {
+  it('表示テスト', () => {
+    cy.visit('http://localhost:8080/login');
+    cy.get('input[name=email]');
+    cy.get('input[name=password]');
+    cy.get('.form-submit');
+  });
+
+  it('ログインできる', () => {
     cy.visit('http://localhost:8080/login');
     cy.get('input[name=email]').type('sample@sample.sample');
     cy.get('input[name=password]').type('password{enter}');
