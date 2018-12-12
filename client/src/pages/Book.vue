@@ -22,12 +22,12 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 
 import * as moment from 'moment';
-import book from '@/apis/book';
-import AppHeader from '@/components/AppHeader';
-import SideNav from '@/components/SideNav';
-import ContentsContainer from '@/components/ContentsContainer';
-import BookDetail from '@/components/BookDetail';
-import { BookState } from '@/store/modules/Home';
+import book from 'src/apis/book';
+import AppHeader from 'src/components/AppHeader';
+import SideNav from 'src/components/SideNav';
+import ContentsContainer from 'src/components/ContentsContainer';
+import BookDetail from 'src/components/BookDetail';
+import { BookState } from 'src/store/modules/Home';
 
 const user = namespace('user');
 

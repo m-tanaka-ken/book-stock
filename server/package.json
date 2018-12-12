@@ -1,0 +1,24 @@
+{
+  "name": "book-stock-server",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "license": "MIT",
+  "dependencies": {
+    "apollo-datasource": "^0.2.1",
+    "apollo-datasource-rest": "^0.2.1",
+    "apollo-server": "^2.2.6",
+    "apollo-server-testing": "^2.2.6",
+    "dotenv": "^6.2.0",
+    "graphql": "^14.0.2",
+    "nodemon": "^1.18.8",
+    "sequelize": "^4.41.2"
+  },
+  "devDependencies": {
+    "apollo": "^2.1.8",
+    "apollo-link": "^1.2.4",
+    "apollo-link-http": "^1.5.7",
+    "jest": "^23.6.0",
+    "nock": "^10.0.4",
+    "node-fetch": "^2.3.0"
+  }
+}

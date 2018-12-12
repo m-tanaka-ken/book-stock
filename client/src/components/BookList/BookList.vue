@@ -27,9 +27,9 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { BookState } from '@/store/modules/Home';
-import { UserState } from '@/store/modules/user';
-import BorrowsButton from '@/components/BorrowsButton';
+import { BookState } from 'src/store/modules/Home';
+import { UserState } from 'src/store/modules/user';
+import BorrowsButton from 'src/components/BorrowsButton';
 
 @Component({
   components: {

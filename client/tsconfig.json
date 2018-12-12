@@ -16,13 +16,16 @@
       "node"
     ],
     "experimentalDecorators": true,
-    "baseUrl": ".",
+    "baseUrl": "..",
     "paths": {
       "@/*": [
         "src/*"
       ]
     }
   },
-  "include": ["./src/**/*", "cypress/**/*.ts"],
+  "include": [
+    "./src/**/*",
+    "client/cypress/**/*.ts"
+  ],
   "exclude": ["node_modules"]
 }

@@ -1,5 +1,5 @@
 import { ActionTree, MutationTree } from 'vuex';
-import apiBook from '@/apis/book';
+import apiBook from 'src/apis/book';
 import * as types from './types';
 
 export interface BookState {

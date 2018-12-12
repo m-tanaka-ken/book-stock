@@ -6,7 +6,7 @@ import validatorConfig from './configs/validator';
 import router from './routes';
 import App from './App.vue';
 import store from './store';
-import { metaInfo } from '@/metaInfo';
+import { metaInfo } from 'src/metaInfo';
 
 Vue.use(VueRouter);
 Vue.use(VeeValidate, validatorConfig);
