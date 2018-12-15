@@ -30,11 +30,11 @@ import { Component, Vue } from 'vue-property-decorator';
 import * as moment from 'moment';
 import { State, namespace } from 'vuex-class';
 
-import AppHeader from 'src/components/AppHeader';
-import SideNav from 'src/components/SideNav';
-import ContentsContainer from 'src/components/ContentsContainer';
-import BookList from 'src/components/BookList';
-import apiBook from 'src/apis/book';
+import AppHeader from '../components/AppHeader';
+import SideNav from '../components/SideNav';
+import ContentsContainer from '../components/ContentsContainer';
+import BookList from '../components/BookList';
+import apiBook from '../apis/book';
 
 const home = namespace('Home');
 const user = namespace('user');

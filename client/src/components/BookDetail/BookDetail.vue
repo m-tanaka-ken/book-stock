@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import BorrowsButton from 'src/components/BorrowsButton';
+import BorrowsButton from '../../components/BorrowsButton';
 
 @Component({
   components: { BorrowsButton }

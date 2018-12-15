@@ -69,7 +69,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import auth from 'src/modules/authenticator';
+import auth from '../modules/authenticator';
 
 @Component({
   metaInfo() {

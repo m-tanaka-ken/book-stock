@@ -1,5 +1,5 @@
 import { ActionTree, MutationTree, Module } from 'vuex';
-import apiUser from 'src/apis/user.ts';
+import apiUser from '../../../apis/user';
 import * as types from './types';
 
 export interface UserState {
