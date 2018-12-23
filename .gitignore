@@ -36,3 +36,4 @@ jspm_packages/
 .idea/modules.xml
 .idea/workspace.xml
 built/
+*.sqlite
