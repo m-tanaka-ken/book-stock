@@ -3,8 +3,8 @@ require('dotenv').config();
 const { ApolloServer } = require('apollo-server');
 
 const typeDefs = require('./schema');
-const resolvers = require('./resolvers');
-// const { createStore } = require('./utils');
+// const resolvers = require('./resolvers');
+const { createStore } = require('./utils');
 
 // const LaunchAPI = require('./datasources/launch');
 // const UserAPI = require('./datasources/user');
@@ -12,8 +12,8 @@ const resolvers = require('./resolvers');
 // const internalEngineDemo = require('./engine-demo');
 
 // creates a sequelize connection once. NOT for every request
-// const store = createStore();
-
+const store = createStore();
+console.log('ストアを見るぞ', store);
 // set up any dataSources our resolvers need
 const dataSources = () => ({
   // launchAPI: new LaunchAPI(),
@@ -38,7 +38,7 @@ const context = async ({ req }) => {
 // Set up Apollo Server
 const server = new ApolloServer({
   typeDefs,
-  resolvers,
+  // resolvers,
   dataSources
   // context,
   // engine: {
@@ -59,7 +59,7 @@ module.exports = {
   // dataSources,
   // context,
   typeDefs,
-  resolvers,
+  // resolvers,
   ApolloServer,
   // LaunchAPI,
   // UserAPI,
