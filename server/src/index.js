@@ -13,11 +13,10 @@ const { createStore } = require('./utils');
 
 // creates a sequelize connection once. NOT for every request
 const store = createStore();
-console.log('ストアを見るぞ', store);
 // set up any dataSources our resolvers need
 const dataSources = () => ({
-  // launchAPI: new LaunchAPI(),
-  // userAPI: new UserAPI({ store }),
+  bookAPI: new BookAPI({ store }),
+  userAPI: new UserAPI({ store }),
 });
 
 // the function that sets up the global context for each resolver, using the req
@@ -62,7 +61,7 @@ module.exports = {
   // resolvers,
   ApolloServer,
   // LaunchAPI,
-  // UserAPI,
+  UserAPI,
   // store,
   server
 };
