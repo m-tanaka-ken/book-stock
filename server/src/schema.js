@@ -9,12 +9,11 @@ const typeDefs = gql`
 
   type Mutations {
     createBookById(id: ID): BookCreateResponse
-    updateBookById(id: ID, status: Number): BookUpdateResponse
     login(email: String): String
   }
 
   type Book {
-    id: Number
+    id: ID
     url: String
     name: String
     created_at: String
@@ -24,11 +23,6 @@ const typeDefs = gql`
   }
 
   type BookCreateResponse {
-    success: Boolean!
-    book: Book
-  }
-
-  type BookUpdateResponse {
     success: Boolean!
     book: Book
   }
