@@ -7,15 +7,23 @@ import router from './routes';
 import App from './App.vue';
 import store from './store';
 import { metaInfo } from './metaInfo';
+import { apolloClient } from './apollo';
+import VueApollo from 'vue-apollo';
 
 Vue.use(VueRouter);
 Vue.use(VeeValidate, validatorConfig);
 Vue.use(VueMeta);
+Vue.use(VueApollo);
+
+const apolloProvider = new VueApollo({
+  defaultClient: apolloClient
+});
 
 new Vue({
   el: '#app',
   store,
   router,
   render: h => h(App),
-  metaInfo
+  metaInfo,
+  apolloProvider
 });
