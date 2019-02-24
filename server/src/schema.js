@@ -5,11 +5,12 @@ const typeDefs = gql`
     books: [Book]
     book(id: ID!): Book
     me: User!
+    user(token: String): User!
   }
 
   type Mutations {
     createBookById(id: ID): BookCreateResponse
-    login(email: String): String
+    login(email: String, password: String): User!
   }
 
   type Book {

@@ -1,8 +1,6 @@
 <template>
   <div class="home">
-    <app-header
-      :name="user.name"
-      class="page-header" />
+    <app-header :name="user.name" class="page-header" />
     <div class="page-container">
       <side-nav />
       <contents-container v-show="true">
