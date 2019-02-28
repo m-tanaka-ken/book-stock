@@ -16,7 +16,10 @@ async function requireAuth(to: any, from: any, next: any) {
   }
 
   // @ts-ignore
-  if (!store.state.user.length && !await store.dispatch('user/fetchUser', localStorage.token)) {
+  if (
+    !store.state.user.length &&
+    !(await store.dispatch('user/fetchUser', localStorage.token))
+  ) {
     auth.logout();
     next({
       path: '/login'
