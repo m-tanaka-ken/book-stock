@@ -1,9 +1,9 @@
-const path = require('path');
-const webpack = require('webpack');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const HtmlPlugin = require('html-webpack-plugin');
+const path = require('path')
+const webpack = require('webpack')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const HtmlPlugin = require('html-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin;
+  .BundleAnalyzerPlugin
 
 module.exports = {
   mode: process.env.WEBPACK_SERVE ? 'development' : 'production',
@@ -20,7 +20,15 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: ['vue-style-loader', 'css-loader', 'sass-loader']
+        use: [
+          'vue-style-loader', 'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              implementation: require('sass')
+            }
+          }
+        ]
       },
       {
         test: /\.vue$/,
@@ -30,7 +38,7 @@ module.exports = {
         test: /\.tsx?$/,
         loader: 'ts-loader',
         exclude: /node_module/,
-        options: { appendTsSuffixTo: [/\.vue$/] }
+        options: {appendTsSuffixTo: [/\.vue$/]}
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
@@ -51,7 +59,7 @@ module.exports = {
   plugins: [
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new VueLoaderPlugin(),
-    new HtmlPlugin({ template: 'src/template.html' }),
+    new HtmlPlugin({template: 'src/template.html'}),
     new BundleAnalyzerPlugin()
   ],
   devServer: {
@@ -60,6 +68,6 @@ module.exports = {
     compress: true,
     host: '0.0.0.0',
     port: 8080,
-    hot: true,
+    hot: true
   }
-};
+}
