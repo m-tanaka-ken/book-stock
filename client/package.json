@@ -4,8 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "$(npm bin)/json-server --watch mock_api_server/db.json --port 3001 & webpack-serve",
-    "webpack-serve": "webpack-serve",
+    "dev": "$(npm bin)/json-server --watch mock_api_server/db.json --port 3001 & webpack-dev-server",
     "build": "webpack --config webpack.config.js",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
@@ -56,6 +55,7 @@
     "typescript": "^3.3.4000",
     "typescript-eslint-parser": "^22.0.0",
     "vue-class-component": "^7.0.2",
+    "vue-eslint-parser": "^6.0.3",
     "vue-loader": "^15.7.0",
     "vue-property-decorator": "^8.1.0",
     "vue-template-compiler": "^2.6.10",

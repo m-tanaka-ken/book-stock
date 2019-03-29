@@ -2,8 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlPlugin = require('html-webpack-plugin');
-const history = require('connect-history-api-fallback');
-const convert = require('koa-connect');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
 
@@ -56,11 +54,12 @@ module.exports = {
     new HtmlPlugin({ template: 'src/template.html' }),
     new BundleAnalyzerPlugin()
   ],
-  serve: {
-    content: path.resolve(__dirname, 'public'),
-    add: app => {
-      app.use(convert(history()));
-    },
-    host: '0.0.0.0'
+  devServer: {
+    contentBase: path.resolve(__dirname, 'public'),
+    historyApiFallback: true,
+    compress: true,
+    host: '0.0.0.0',
+    port: 8080,
+    hot: true,
   }
 };
