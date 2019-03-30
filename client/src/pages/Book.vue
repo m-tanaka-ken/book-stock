@@ -1,6 +1,6 @@
 <template>
   <div class="book">
-    <app-header 
+    <app-header
       :name="name"
       class="page-header"
     />
