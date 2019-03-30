@@ -1,25 +1,35 @@
 <template>
   <div class="book-list-container">
-    <h2 class="title">{{ title }}</h2>
+    <h2 class="title">
+      {{ title }}
+    </h2>
     <ul class="list">
       <li 
         v-for="book in books"
         :key="book.id"
         class="item"
-      ><router-link 
-        :to="`/books/${book.id}`" 
-        class="item-image"><img
-          :src="book.url"
-          :alt="book.name"
+      >
+        <router-link 
+          :to="`/books/${book.id}`" 
+          class="item-image"
         >
-      </router-link>
-        <p class="item-title"><router-link :to="`/books/${book.id}`">{{ book.name }}</router-link></p>
+          <img
+            :src="book.url"
+            :alt="book.name"
+          >
+        </router-link>
+        <p class="item-title">
+          <router-link :to="`/books/${book.id}`">
+            {{ book.name }}
+          </router-link>
+        </p>
         <borrows-button 
           :book-state="getBookState(book, user)" 
-          class="item-button" 
-          size="small" 
           @borrowBook="$emit('borrowBook', book)" 
-          @returnBook="$emit('returnBook', book)" />
+          @returnBook="$emit('returnBook', book)" 
+          class="item-button" 
+          size="small"
+        />
       </li>
     </ul>
   </div>
@@ -27,9 +37,10 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { BookState } from '../../store/modules/Home';
-import { UserState } from '../../store/modules/user';
-import BorrowsButton from '../../components/BorrowsButton';
+
+import { BookState } from '@/store/modules/Home';
+import { UserState } from '@/store/modules/user';
+import BorrowsButton from '@/components/BorrowsButton';
 
 @Component({
   components: {

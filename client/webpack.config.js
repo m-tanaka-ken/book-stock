@@ -7,6 +7,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 
 module.exports = {
   mode: process.env.WEBPACK_SERVE ? 'development' : 'production',
+  devtool: 'inline-source-map',
   output: {
     path: path.resolve(__dirname, 'public'),
     publicPath: '/',
@@ -53,14 +54,14 @@ module.exports = {
     extensions: ['*', '.mjs', '.ts', '.js', '.vue', '.json'],
     alias: {
       vue$: 'vue/dist/vue.esm.js',
-      '@': path.resolve(__dirname, '..', 'src')
+      '@': path.resolve(__dirname, 'src/')
     }
   },
   plugins: [
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new VueLoaderPlugin(),
     new HtmlPlugin({template: 'src/template.html'}),
-    new BundleAnalyzerPlugin()
+    new BundleAnalyzerPlugin({ openAnalyzer: false })
   ],
   devServer: {
     contentBase: path.resolve(__dirname, 'public'),

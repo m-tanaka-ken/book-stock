@@ -3,21 +3,26 @@
     <div class="image-container">
       <img 
         :src="book.url" 
-        class="image-item">
+        class="image-item"
+      >
     </div>
     <div class="detail-container">
-      <h2 class="title">{{ book.name }}</h2>
+      <h2 class="title">
+        {{ book.name }}
+      </h2>
       <borrows-button 
         :book-state="bookState" 
         @borrowBook="borrowBook" 
-        @returnBook="returnBook" />
+        @returnBook="returnBook"
+      />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import BorrowsButton from '../../components/BorrowsButton';
+
+import BorrowsButton from '@/components/BorrowsButton';
 
 @Component({
   components: { BorrowsButton }

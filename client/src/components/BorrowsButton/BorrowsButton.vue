@@ -2,25 +2,28 @@
   <button
     v-if="'available' === bookState"
     :class="size"
+    @click="$emit('borrowBook')"
     type="button"
     class="btn"
-    @click="$emit('borrowBook')"
-  >借りる
+  >
+    借りる
   </button>
   <button
     v-else-if="'borrowedSelf' === bookState"
     :class="size"
+    @click="$emit('returnBook')"
     type="button"
     class="btn return"
-    @click="$emit('returnBook')"
-  >返却
+  >
+    返却
   </button>
   <button
     v-else
     :class="size"
     type="button"
     class="btn disabled"
-  >貸出中
+  >
+    貸出中
   </button>
 </template>
 

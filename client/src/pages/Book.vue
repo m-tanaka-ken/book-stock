@@ -2,7 +2,8 @@
   <div class="book">
     <app-header 
       :name="name"
-      class="page-header" />
+      class="page-header"
+    />
     <div class="page-container">
       <side-nav />
       <contents-container>
@@ -22,12 +23,12 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 
 import * as moment from 'moment';
-import book from '../apis/book';
-import AppHeader from '../components/AppHeader';
-import SideNav from '../components/SideNav';
-import ContentsContainer from '../components/ContentsContainer';
-import BookDetail from '../components/BookDetail';
-import { BookState } from '../store/modules/Home';
+import book from '@/apis/book';
+import AppHeader from '@/components/AppHeader';
+import SideNav from '@/components/SideNav';
+import ContentsContainer from '@/components/ContentsContainer';
+import BookDetail from '@/components/BookDetail';
+import { BookState } from '@/store/modules/Home';
 
 const user = namespace('user');
 
