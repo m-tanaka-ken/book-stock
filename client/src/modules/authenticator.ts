@@ -1,5 +1,5 @@
-import apiUser from '../apis/user';
-import store from '../store';
+import apiUser from '@/apis/user';
+import store from '@/store';
 
 export default {
   async login(email: string, password: string) {

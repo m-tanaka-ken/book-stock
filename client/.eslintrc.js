@@ -1,7 +1,11 @@
 module.exports = {
   root: true,
+  parser: 'vue-eslint-parser',
   parserOptions: {
-    parser: 'typescript-eslint-parser'
+    parser: '@typescript-eslint/parser',
+    sourceType: 'module',
+    project: './tsconfig.json',
+    extraFileExtensions: ['.vue']
   },
   env: {
     browser: true,
@@ -9,10 +13,9 @@ module.exports = {
     node: true
   },
   extends: [
-    'plugin:vue/recommended',
-    'prettier'
+    'plugin:vue/recommended'
   ],
-  plugins: ['prettier', 'vue', 'typescript'],
+  plugins: ['vue', '@typescript-eslint'],
   rules: {
     // https://github.com/eslint/typescript-eslint-parser#known-issues
     'no-undef': 'off',
@@ -25,6 +28,5 @@ module.exports = {
     // very strange as somehow this rule gets different behaviors depending
     // on the presence of typescript-eslint-parser...
     'strict': 'off',
-    'prettier/prettier': ['error', { 'singleQuote': true }]
     }
 };

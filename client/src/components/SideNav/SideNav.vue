@@ -24,11 +24,15 @@
     </div>
     <div class="category sp">
       <h2 
-        class="dropdown" 
-        @click="isActive = !isActive">カテゴリ</h2>
+        @click="isActive = !isActive" 
+        class="dropdown"
+      >
+        カテゴリ
+      </h2>
       <div 
         v-if="isActive" 
-        class="list">
+        class="list"
+      >
         <ul>
           <li>JavaScript</li>
           <li>React</li>

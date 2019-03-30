@@ -1,22 +1,25 @@
 <template>
   <div class="home">
-    <app-header :name="user.name" class="page-header" />
+    <app-header
+      :name="user.name"
+      class="page-header"
+    />
     <div class="page-container">
       <side-nav />
       <contents-container v-show="true">
         <book-list
           :books="newBooks"
           :user="user"
-          title="新着"
           @borrowBook="borrowBook"
           @returnBook="returnBook"
+          title="新着"
         />
         <book-list
           :books="recommendBooks"
           :user="user"
-          title="おすすめ"
           @borrowBook="borrowBook"
           @returnBook="returnBook"
+          title="おすすめ"
         />
       </contents-container>
     </div>
@@ -25,14 +28,14 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import * as moment from 'moment';
 import { State, namespace } from 'vuex-class';
+import { format } from 'date-fns';
 
-import AppHeader from '../components/AppHeader';
-import SideNav from '../components/SideNav';
-import ContentsContainer from '../components/ContentsContainer';
-import BookList from '../components/BookList';
-import apiBook from '../apis/book';
+import AppHeader from '@/components/AppHeader';
+import SideNav from '@/components/SideNav';
+import ContentsContainer from '@/components/ContentsContainer';
+import BookList from '@/components/BookList';
+import apiBook from '@/apis/book';
 
 const home = namespace('Home');
 const user = namespace('user');
@@ -73,7 +76,7 @@ export default class Home extends Vue {
       name: book.name,
       returned_at: book.returnedAt,
       created_at: book.createdAt,
-      borrowed_at: moment().format('YYYY-MM-DD H:mm:ss'),
+      borrowed_at: format(new Date(), 'YYYY-MM-DD H:mm:ss'),
       last_borrowed_user: this.user.name
     };
     await apiBook.borrowBook(payload);
@@ -88,7 +91,7 @@ export default class Home extends Vue {
       created_at: book.createdAt,
       borrowed_at: book.borrowedAt,
       last_borrowed_user: book.lastBorrowedUser,
-      returned_at: moment().format('YYYY-MM-DD H:mm:ss')
+      returned_at: format(new Date(), 'YYYY-MM-DD H:mm:ss')
     };
     await apiBook.returnBook(payload);
     this.init();

@@ -1,16 +1,19 @@
 <template>
   <div class="page-login">
     <div class="form-container">
-      <h2 class="heading">Login</h2>
+      <h2 class="heading">
+        Login
+      </h2>
       <div
         v-if="authError"
         class="error"
-      >emailかpasswordが間違ってます
+      >
+        emailかpasswordが間違ってます
       </div>
       <form
+        @submit.prevent="login"
         class="auth-form"
         novalidate="true"
-        @submit.prevent="login"
       >
         <div class="form-row">
           <div class="field-info">
@@ -24,8 +27,8 @@
           <div class="field-row">
             <div class="field">
               <input
-                v-validate="'required'"
                 id="email"
+                v-validate="'required'"
                 v-model="email"
                 name="email"
                 type="email"
@@ -69,7 +72,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import auth from '../modules/authenticator';
+import auth from '@/modules/authenticator';
 
 @Component({
   metaInfo() {
