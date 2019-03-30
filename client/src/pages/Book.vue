@@ -21,8 +21,8 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
+import { format } from 'date-fns';
 
-import * as moment from 'moment';
 import book from '@/apis/book';
 import AppHeader from '@/components/AppHeader';
 import SideNav from '@/components/SideNav';
@@ -93,7 +93,7 @@ export default class Book extends Vue {
       name: this.book.name,
       created_at: this.book.createdAt,
       returned_at: this.book.returnedAt,
-      borrowed_at: moment().format('YYYY-MM-DD H:mm:ss'),
+      borrowed_at: format(new Date(), 'YYYY-MM-DD H:mm:ss'),
       last_borrowed_user: this.name
     };
     await book.borrowBook(payload);
@@ -112,7 +112,7 @@ export default class Book extends Vue {
       created_at: this.book.createdAt,
       borrowed_at: this.book.borrowedAt,
       last_borrowed_user: this.name,
-      returned_at: moment().format('YYYY-MM-DD H:mm:ss')
+      returned_at: format(new Date(), 'YYYY-MM-DD H:mm:ss')
     };
     await book.returnBook(payload);
     this.init();

@@ -60,7 +60,7 @@ module.exports = {
     }
   },
   plugins: [
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new webpack.IgnorePlugin(/^\.\/locale$/),
     new VueLoaderPlugin(),
     new HtmlPlugin({template: 'src/template.html'}),
     new BundleAnalyzerPlugin({ openAnalyzer: false })
