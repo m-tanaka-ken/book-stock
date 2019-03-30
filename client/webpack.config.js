@@ -7,12 +7,13 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 
 module.exports = {
   mode: process.env.WEBPACK_SERVE ? 'development' : 'production',
-  devtool: 'inline-source-map',
+  entry: './src/index.ts',
   output: {
     path: path.resolve(__dirname, 'public'),
     publicPath: '/',
     filename: 'main.js'
   },
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
@@ -22,11 +23,12 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          'vue-style-loader', 'css-loader',
+          'vue-style-loader',
+          'css-loader',
           {
             loader: 'sass-loader',
             options: {
-              implementation: require('sass')
+              implementation: require('sass'),
             }
           }
         ]
@@ -51,7 +53,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['*', '.mjs', '.ts', '.js', '.vue', '.json'],
+    extensions: ['*', '.mjs', '.ts', '.js', '.vue', '.json', 'css', 'scss'],
     alias: {
       vue$: 'vue/dist/vue.esm.js',
       '@': path.resolve(__dirname, 'src/')
@@ -67,8 +69,6 @@ module.exports = {
     contentBase: path.resolve(__dirname, 'public'),
     historyApiFallback: true,
     compress: true,
-    host: '0.0.0.0',
-    port: 8080,
     hot: true
   }
 }
