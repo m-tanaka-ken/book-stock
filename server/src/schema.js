@@ -8,7 +8,7 @@ const typeDefs = gql`
     user(token: String): User!
   }
 
-  type Mutations {
+  type Mutation {
     createBookById(id: ID): BookCreateResponse
     login(email: String, password: String): User!
   }

@@ -80,19 +80,11 @@ const books = [
 
 module.exports = {
   Query: {
-    books: () => {
-      return books;
-    },
-    book: id => {
-      return books.find(book => book.id === id);
-    }
+    books: () => books,
+    book: (_, {id}) => books.find(book => book.id === Number(id))
   },
 
-  Mutations: {
-    login: email => {
-      const user = users.find(user => user.email === email);
-
-      return user.token;
-    }
+  Mutation: {
+    login: (_, {email}) => users.find(user => user.email === email)
   }
 };
